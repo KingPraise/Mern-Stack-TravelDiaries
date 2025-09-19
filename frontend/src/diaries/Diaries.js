@@ -20,7 +20,18 @@ const Diaries = () => {
       padding={3}
       alignItems={"center"}
     >
-      {posts && posts.map((e) => <DiaryItem key={e} />)}
+      {posts &&
+        posts.map((e, index) => (
+          <DiaryItem
+            date={new Date(`${e.date}`).toLocaleDateString}
+            description={e.description}
+            image={e.image}
+            id={e.id}
+            location={e.location}
+            title={e.title}
+            key={index}
+          />
+        ))}
     </Box>
   );
 };

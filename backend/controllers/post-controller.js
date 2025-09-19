@@ -46,7 +46,6 @@ export const addPost = async (req, res) => {
   }
 
   let post;
-
   try {
     post = new Post({
       title,
@@ -56,13 +55,9 @@ export const addPost = async (req, res) => {
       date: new Date(`${date}`),
       user,
     });
-
-    const session = await mongoose.startSession();
-    session.startTransaction();
     existingUser.posts.push(post);
-    await existingUser.save({ session });
-    post = await post.save({ session });
-    session.commitTransaction();
+    await existingUser.save();
+    post = await post.save();
   } catch (err) {
     return console.log(err);
   }
@@ -128,13 +123,10 @@ export const deletePost = async (req, res) => {
   const id = req.params.id;
   let post;
   try {
-    const session = await mongoose.startSession();
-    session.startTransaction();
     post = await Post.findById(id).populate("user");
     post.user.posts.pull(post);
-    await post.user.save({ session });
+    await post.user.save();
     post = await Post.findByIdAndRemove(id);
-    session.commitTransaction();
   } catch (err) {
     return console.log(err);
   }

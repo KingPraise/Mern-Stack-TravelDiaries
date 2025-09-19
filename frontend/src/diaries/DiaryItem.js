@@ -14,7 +14,7 @@ import EditLocationAltIcon from "@mui/icons-material/EditLocationAlt";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-const DiaryItem = () => {
+const DiaryItem = ({ title, description, image, location, date, id }) => {
   return (
     <div style={{ margin: "20px" }}>
       <Card
@@ -35,12 +35,13 @@ const DiaryItem = () => {
               {<EditLocationAltIcon />}
             </IconButton>
           }
-          title="Shrimp and Chorizo Paella"
-          subheader="September 14, 2016"
+          title={location}
+          header={location}
+          subheader={date}
         />
         <img
-          src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhdmVsJTIwZGlhcnllc3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
-          alt="Diary"
+          src={image}
+          alt={title}
           style={{ width: "100%", height: 140, objectFit: "cover" }}
         />
         <CardContent>
@@ -50,7 +51,7 @@ const DiaryItem = () => {
             color="text.secondary"
             component="div"
           >
-            Diary Title
+            {title}
           </Typography>
           <hr />
           <Box paddingTop={1} display="flex">
@@ -58,7 +59,7 @@ const DiaryItem = () => {
               King Praise
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              This is a short description of the diary entry.
+              {description}
             </Typography>
           </Box>
         </CardContent>
